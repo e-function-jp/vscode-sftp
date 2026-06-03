@@ -7,7 +7,8 @@ import CustomError from '../customError';
 
 const util = require('util');
 if (typeof util.isDate !== 'function') {
-  util.isDate = value => value instanceof Date;
+  util.isDate =
+    (util.types && util.types.isDate) || (value => value instanceof Date);
 }
 
 const { Client } = require('ssh2');
