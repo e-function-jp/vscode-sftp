@@ -1,10 +1,17 @@
-import { Client } from 'ssh2';
 import upath from '../upath';
 import RemoteClient, { ErrorCode, ConnectOption, Config } from './remoteClient';
 import localFs from '../localFs';
 import { FileSystem, RemoteFileSystem, SFTPFileSystem } from '../fs';
 import logger from '../../logger';
 import CustomError from '../customError';
+
+const util = require('util');
+if (typeof util.isDate !== 'function') {
+  util.isDate =
+    (util.types && util.types.isDate) || (value => value instanceof Date);
+}
+
+const { Client } = require('ssh2');
 
 let MAX_OPEN_FD_NUM = 222;
 
